@@ -1,0 +1,26 @@
+name: Minecraft AFK Bot
+
+on:
+  schedule:
+    # Automatically restarts every 5 hours to stay online continuously
+    - cron: '0 */5 * * *'
+  workflow_dispatch: # Lets you start or stop the bot manually with one click
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Mineflayer Bot
+        run: node index.js
+        
